@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4efe8" />
+  <title>Yoga-Fitness｜辦公室體感教練</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Yoga-Fitness · v0.1 MVP</p>
+        <h1>站起來，讓肩頸知道你還記得它們。</h1>
+        <p class="subtitle">透過鏡頭辨識姿勢，先從辦公室舒展、站姿瑜珈與基礎健身開始。</p>
+      </div>
+      <div class="privacy-pill">🔒 影像只在瀏覽器端分析</div>
+    </header>
+
+    <section class="mode-grid" aria-label="訓練模式">
+      <button class="mode-card active" data-mode="office">
+        <span>🪑</span><strong>久坐救援</strong><small>低衝擊、安靜、適合辦公室</small>
+      </button>
+      <button class="mode-card" data-mode="yoga">
+        <span>🧘</span><strong>站姿瑜珈</strong><small>平衡、角度、穩定維持</small>
+      </button>
+      <button class="mode-card" data-mode="fitness">
+        <span>🏋️</span><strong>基礎健身</strong><small>深蹲、弓箭步、動作計數</small>
+      </button>
+    </section>
+
+    <section class="workspace">
+      <aside class="exercise-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">本次訓練</p>
+            <h2 id="modeTitle">久坐救援</h2>
+          </div>
+          <span id="exerciseCount" class="count-badge">0</span>
+        </div>
+        <div id="exerciseList" class="exercise-list"></div>
+      </aside>
+
+      <section class="camera-panel">
+        <div class="camera-wrap">
+          <video id="webcam" autoplay playsinline muted></video>
+          <canvas id="overlay"></canvas>
+          <div id="cameraPlaceholder" class="camera-placeholder">
+            <div class="placeholder-icon">📷</div>
+            <strong>尚未啟動鏡頭</strong>
+            <span>請讓頭到腳都能進入畫面</span>
+          </div>
+          <div class="camera-topbar">
+            <span id="cameraState" class="status-chip">鏡頭未啟動</span>
+            <button id="mirrorBtn" class="ghost-btn" type="button">鏡像：開</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="startCameraBtn" class="primary-btn" type="button">啟動鏡頭</button>
+          <button id="resetBtn" class="secondary-btn" type="button">重新校正</button>
+        </div>
+      </section>
+
+      <aside class="coach-panel">
+        <p class="eyebrow">虛擬教練</p>
+        <h2 id="exerciseName">站姿側伸展</h2>
+        <p id="exerciseInstruction" class="instruction">雙腳站穩，單手上舉，身體慢慢往另一側伸展。</p>
+
+        <div class="score-card">
+          <div class="score-ring" id="scoreRing">
+            <span id="scoreValue">--</span>
+            <small>姿勢分數</small>
+          </div>
+          <div>
+            <p id="coachMessage" class="coach-message">啟動鏡頭後開始辨識。</p>
+            <p id="detailMessage" class="detail-message">第一版會先判斷是否完整入鏡、關節角度與動作狀態。</p>
+          </div>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric"><span>維持</span><strong id="holdValue">0.0s</strong></div>
+          <div class="metric"><span>次數</span><strong id="repValue">0</strong></div>
+          <div class="metric"><span>入鏡</span><strong id="visibilityValue">--</strong></div>
+        </div>
+
+        <div class="hold-track" aria-label="姿勢維持進度">
+          <div id="holdBar" class="hold-bar"></div>
+        </div>
+
+        <div class="note-box">
+          <strong>目前先不做地板瑜珈</strong>
+          <span>下犬式、平板式、眼鏡蛇式等會留到後續版本，避免一開始就跟鏡頭角度互相折磨。</span>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
