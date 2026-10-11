@@ -25,10 +25,10 @@
     body.workout-active .stage-coach-message{max-width:min(920px,65vw)}
     body.workout-active .stage-detail-message,body.workout-active .stage-instruction{max-width:min(920px,67vw)}
 
-    .camera-wrap.tracking-ok{border-color:#ffd84d!important;box-shadow:0 0 30px rgba(255,216,77,.9),inset 0 0 42px rgba(255,216,77,.18)!important;animation:readyPulse 1.05s ease-in-out infinite alternate!important}
-    body.workout-active:has(.camera-wrap.tracking-ok)::before{border-color:#ffd84d!important;box-shadow:inset 0 0 52px rgba(255,216,77,.34),0 0 28px rgba(255,216,77,.5)!important}
-    body.workout-active .camera-wrap.tracking-ok .virtual-coach{border-color:#ffd84d;box-shadow:0 0 30px rgba(255,216,77,.45),0 18px 50px rgba(0,0,0,.32)}
-    @keyframes readyPulse{from{box-shadow:0 0 14px rgba(255,216,77,.58),inset 0 0 24px rgba(255,216,77,.12)}to{box-shadow:0 0 38px rgba(255,216,77,.98),inset 0 0 56px rgba(255,216,77,.25)}}
+    /* 辨識成功：固定黃色邊框，不再呼吸閃爍。 */
+    .camera-wrap.tracking-ok{border-color:#ffd84d!important;box-shadow:0 0 18px rgba(255,216,77,.55),inset 0 0 16px rgba(255,216,77,.08)!important;animation:none!important}
+    body.workout-active:has(.camera-wrap.tracking-ok)::before{border-color:#ffd84d!important;box-shadow:inset 0 0 26px rgba(255,216,77,.16),0 0 16px rgba(255,216,77,.24)!important;animation:none!important}
+    body.workout-active .camera-wrap.tracking-ok .virtual-coach{border-color:#ffd84d;box-shadow:0 0 16px rgba(255,216,77,.26),0 18px 50px rgba(0,0,0,.32)}
 
     .voice-controls{display:flex;align-items:center;gap:8px;pointer-events:auto}
     .voice-btn{border:0;border-radius:14px;padding:9px 12px;font-weight:900;background:rgba(255,255,255,.92);color:#24312b;cursor:pointer}
@@ -54,9 +54,9 @@
   <main class="app-shell">
     <header class="hero">
       <div>
-        <p class="eyebrow">Yoga-Fitness · v0.5 TEST</p>
+        <p class="eyebrow">Yoga-Fitness · v0.5.1 TEST</p>
         <h1>站起來，讓肩頸知道你還記得它們。</h1>
-        <p class="subtitle">新版側腰伸展降低卡關門檻，加入人體輪廓光暈與語音教練。</p>
+        <p class="subtitle">人體辨識改成穩定外輪廓光圈，不再顯示剪影或閃爍殘影。</p>
       </div>
       <div class="privacy-pill">🔒 影像只在瀏覽器端分析</div>
     </header>
@@ -96,7 +96,7 @@
             <h2 id="stageExerciseName">側腰伸展</h2>
             <p id="stageInstruction" class="stage-instruction">跟著中央提示與右側示範人物，一步一步完成。</p>
             <div id="stageCoachMessage" class="stage-coach-message">按下「開始運動」</div>
-            <div id="stageDetailMessage" class="stage-detail-message">辨識成功時人體外圍會亮起黃色光暈。</div>
+            <div id="stageDetailMessage" class="stage-detail-message">辨識成功時只會保留人體外圍黃色光圈。</div>
             <div class="stage-metrics">
               <div><span>姿勢</span><strong id="stageScoreValue">--</strong></div>
               <div><span>維持</span><strong id="stageHoldValue">0.0s</strong></div>
@@ -125,5 +125,6 @@
     </section>
   </main>
   <script type="module" src="main.js?v=5"></script>
+  <script type="module" src="glow-fix.js?v=1"></script>
 </body>
 </html>
