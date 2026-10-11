@@ -9,122 +9,29 @@
   <style>
     .tracking-requirement{position:absolute;z-index:28;left:50%;top:max(62px,calc(env(safe-area-inset-top) + 54px));transform:translateX(-50%);padding:8px 16px;border-radius:999px;background:rgba(7,16,12,.72);color:#fff;border:2px solid rgba(255,255,255,.68);font-weight:900;font-size:clamp(13px,1.3vw,18px);backdrop-filter:blur(8px);pointer-events:none;white-space:nowrap}
     .virtual-coach{position:absolute;z-index:24;right:clamp(16px,3vw,46px);top:50%;transform:translateY(-46%);width:clamp(190px,23vw,350px);min-height:clamp(300px,52vh,560px);padding:16px 14px 12px;border-radius:30px;background:linear-gradient(160deg,rgba(18,34,27,.88),rgba(8,18,14,.7));border:3px solid rgba(255,255,255,.82);box-shadow:0 20px 60px rgba(0,0,0,.35);backdrop-filter:blur(12px);color:#fff;text-align:center;pointer-events:none}
-    .virtual-coach .coach-title{font-weight:950;font-size:clamp(16px,1.6vw,22px);letter-spacing:.08em}
-    .virtual-coach .coach-subtitle{margin-top:5px;min-height:2.6em;font-size:clamp(13px,1.15vw,17px);line-height:1.3;opacity:.9;font-weight:850}
-    .virtual-coach svg{display:block;width:100%;height:auto;max-height:420px;margin:6px auto 0;overflow:visible}
-    .coach-ground{stroke:rgba(255,255,255,.22);stroke-width:5;stroke-linecap:round}
-    .avatar-skin{stroke:#ffd7bd;stroke-width:17;stroke-linecap:round;stroke-linejoin:round;fill:none}
-    .avatar-leg{stroke:#7fa6b8;stroke-width:22;stroke-linecap:round;stroke-linejoin:round;fill:none}
-    .avatar-shoe{stroke:#f5f7fa;stroke-width:11;stroke-linecap:round}
-    .avatar-shirt{fill:#8fe0b0;stroke:#effff5;stroke-width:4}
-    .avatar-head{fill:#ffd7bd;stroke:#fff5e9;stroke-width:4}
-    .avatar-hair{fill:#36423c}.avatar-eye{fill:#34443c}.avatar-smile{stroke:#b96e63;stroke-width:3;fill:none;stroke-linecap:round}
-    .motion-path{stroke:#ffdb58;stroke-width:7;fill:none;stroke-linecap:round;stroke-dasharray:9 10;filter:drop-shadow(0 0 7px rgba(255,219,88,.8))}
-    .motion-text{fill:#ffdf65;font-size:18px;font-weight:1000}.coach-step-badge{fill:#ffdf65;stroke:#fff7cf;stroke-width:3}.coach-step-text{fill:#26332c;font-size:13px;font-weight:1000}
-    body.workout-active .stage-hud{padding-right:clamp(210px,28vw,390px)}
-    body.workout-active .stage-coach-message{max-width:min(920px,65vw)}
-    body.workout-active .stage-detail-message,body.workout-active .stage-instruction{max-width:min(920px,67vw)}
-
-    /* 辨識成功：固定黃色邊框，不再呼吸閃爍。 */
-    .camera-wrap.tracking-ok{border-color:#ffd84d!important;box-shadow:0 0 18px rgba(255,216,77,.55),inset 0 0 16px rgba(255,216,77,.08)!important;animation:none!important}
-    body.workout-active:has(.camera-wrap.tracking-ok)::before{border-color:#ffd84d!important;box-shadow:inset 0 0 26px rgba(255,216,77,.16),0 0 16px rgba(255,216,77,.24)!important;animation:none!important}
-    body.workout-active .camera-wrap.tracking-ok .virtual-coach{border-color:#ffd84d;box-shadow:0 0 16px rgba(255,216,77,.26),0 18px 50px rgba(0,0,0,.32)}
-
-    .voice-controls{display:flex;align-items:center;gap:8px;pointer-events:auto}
-    .voice-btn{border:0;border-radius:14px;padding:9px 12px;font-weight:900;background:rgba(255,255,255,.92);color:#24312b;cursor:pointer}
-    .voice-volume{display:flex;align-items:center;gap:6px;padding:7px 9px;border-radius:14px;background:rgba(10,18,14,.68);color:#fff;font-size:12px;font-weight:850}
-    .voice-volume input{width:90px;accent-color:#ffd84d}
-    .voice-volume.off{opacity:.45}
-    .voice-note{margin:8px 0 0;color:#6b776f;font-size:13px}
-
-    @media(max-width:760px){
-      .virtual-coach{right:8px;top:auto;bottom:86px;transform:none;width:154px;min-height:222px;padding:9px 7px;border-radius:20px}
-      .virtual-coach svg{max-height:155px}.virtual-coach .coach-subtitle{font-size:11px;min-height:2.5em}
-      body.workout-active .stage-hud{padding-right:168px;padding-left:10px;place-items:start;text-align:left}
-      body.workout-active #stageExerciseName{font-size:clamp(32px,9vw,54px)}
-      body.workout-active .stage-instruction{font-size:clamp(17px,4.8vw,26px)}
-      body.workout-active .stage-coach-message{font-size:clamp(30px,9vw,56px);max-width:calc(100vw - 178px);padding:10px 14px}
-      body.workout-active .stage-detail-message{font-size:clamp(16px,4.6vw,25px);max-width:calc(100vw - 178px)}
-      .tracking-requirement{top:max(58px,calc(env(safe-area-inset-top) + 50px));font-size:12px;padding:7px 10px}
-      .voice-volume{display:none}.voice-btn{padding:8px 10px}
-    }
+    .virtual-coach .coach-title{font-weight:950;font-size:clamp(16px,1.6vw,22px);letter-spacing:.08em}.virtual-coach .coach-subtitle{margin-top:5px;min-height:2.6em;font-size:clamp(13px,1.15vw,17px);line-height:1.3;opacity:.9;font-weight:850}.virtual-coach svg{display:block;width:100%;height:auto;max-height:420px;margin:6px auto 0;overflow:visible}
+    .coach-ground{stroke:rgba(255,255,255,.22);stroke-width:5;stroke-linecap:round}.avatar-skin{stroke:#ffd7bd;stroke-width:17;stroke-linecap:round;stroke-linejoin:round;fill:none}.avatar-leg{stroke:#7fa6b8;stroke-width:22;stroke-linecap:round;stroke-linejoin:round;fill:none}.avatar-shoe{stroke:#f5f7fa;stroke-width:11;stroke-linecap:round}.avatar-shirt{fill:#8fe0b0;stroke:#effff5;stroke-width:4}.avatar-head{fill:#ffd7bd;stroke:#fff5e9;stroke-width:4}.avatar-hair{fill:#36423c}.avatar-eye{fill:#34443c}.avatar-smile{stroke:#b96e63;stroke-width:3;fill:none;stroke-linecap:round}.motion-path{stroke:#ffdb58;stroke-width:7;fill:none;stroke-linecap:round;stroke-dasharray:9 10}.motion-text{fill:#ffdf65;font-size:18px;font-weight:1000}.coach-step-badge{fill:#ffdf65;stroke:#fff7cf;stroke-width:3}.coach-step-text{fill:#26332c;font-size:13px;font-weight:1000}
+    body.workout-active .stage-hud{padding-right:clamp(210px,28vw,390px)}body.workout-active .stage-coach-message{max-width:min(920px,65vw)}body.workout-active .stage-detail-message,body.workout-active .stage-instruction{max-width:min(920px,67vw)}
+    .camera-wrap.tracking-ok{border-color:#ffd84d!important;box-shadow:0 0 20px rgba(255,216,77,.62),inset 0 0 16px rgba(255,216,77,.08)!important;animation:none!important}body.workout-active:has(.camera-wrap.tracking-ok)::before{border-color:#ffd84d!important;box-shadow:inset 0 0 28px rgba(255,216,77,.18),0 0 18px rgba(255,216,77,.3)!important;animation:none!important}body.workout-active .camera-wrap.tracking-ok .virtual-coach{border-color:#ffd84d;box-shadow:0 0 18px rgba(255,216,77,.3),0 18px 50px rgba(0,0,0,.32)}
+    #overlay{z-index:7;pointer-events:none}.voice-controls{display:flex;align-items:center;gap:8px;pointer-events:auto}.voice-btn{border:0;border-radius:14px;padding:9px 12px;font-weight:900;background:rgba(255,255,255,.92);color:#24312b;cursor:pointer}.voice-volume{display:flex;align-items:center;gap:6px;padding:7px 9px;border-radius:14px;background:rgba(10,18,14,.68);color:#fff;font-size:12px;font-weight:850}.voice-volume input{width:90px;accent-color:#ffd84d}.voice-volume.off{opacity:.45}.voice-note{margin:8px 0 0;color:#6b776f;font-size:13px}
+    @media(max-width:760px){.virtual-coach{right:8px;top:auto;bottom:86px;transform:none;width:154px;min-height:222px;padding:9px 7px;border-radius:20px}.virtual-coach svg{max-height:155px}.virtual-coach .coach-subtitle{font-size:11px;min-height:2.5em}body.workout-active .stage-hud{padding-right:168px;padding-left:10px;place-items:start;text-align:left}body.workout-active #stageExerciseName{font-size:clamp(32px,9vw,54px)}body.workout-active .stage-instruction{font-size:clamp(17px,4.8vw,26px)}body.workout-active .stage-coach-message{font-size:clamp(30px,9vw,56px);max-width:calc(100vw - 178px);padding:10px 14px}body.workout-active .stage-detail-message{font-size:clamp(16px,4.6vw,25px);max-width:calc(100vw - 178px)}.tracking-requirement{top:max(58px,calc(env(safe-area-inset-top) + 50px));font-size:12px;padding:7px 10px}.voice-volume{display:none}.voice-btn{padding:8px 10px}}
   </style>
 </head>
 <body>
   <main class="app-shell">
-    <header class="hero">
-      <div>
-        <p class="eyebrow">Yoga-Fitness · v0.5.1 TEST</p>
-        <h1>站起來，讓肩頸知道你還記得它們。</h1>
-        <p class="subtitle">人體辨識改成穩定外輪廓光圈，不再顯示剪影或閃爍殘影。</p>
-      </div>
-      <div class="privacy-pill">🔒 影像只在瀏覽器端分析</div>
-    </header>
-
-    <section class="mode-grid" aria-label="訓練模式">
-      <button class="mode-card active" data-mode="office"><span>🪑</span><strong>久坐救援</strong><small>可站可坐，上半身近距離辨識</small></button>
-      <button class="mode-card" data-mode="yoga"><span>🧘</span><strong>站姿瑜珈</strong><small>平衡、角度、穩定維持</small></button>
-      <button class="mode-card" data-mode="fitness"><span>🏋️</span><strong>基礎健身</strong><small>深蹲、弓箭步、動作計數</small></button>
-    </section>
-
+    <header class="hero"><div><p class="eyebrow">Yoga-Fitness · v0.6 TEST</p><h1>站起來，讓肩頸知道你還記得它們。</h1><p class="subtitle">所有動作都改成完整引導流程：開始、執行、維持、回正、完成。</p></div><div class="privacy-pill">🔒 影像只在瀏覽器端分析</div></header>
+    <section class="mode-grid" aria-label="訓練模式"><button class="mode-card active" data-mode="office"><span>🪑</span><strong>久坐救援</strong><small>可站可坐，上半身近距離辨識</small></button><button class="mode-card" data-mode="yoga"><span>🧘</span><strong>站姿瑜珈</strong><small>平衡、左右交換、回正</small></button><button class="mode-card" data-mode="fitness"><span>🏋️</span><strong>基礎健身</strong><small>完整動作週期與計數</small></button></section>
     <section class="workspace">
-      <aside class="exercise-panel setup-only">
-        <div class="panel-heading"><div><p class="eyebrow">選擇動作</p><h2 id="modeTitle">久坐救援</h2></div><span id="exerciseCount" class="count-badge">0</span></div>
-        <div id="exerciseList" class="exercise-list"></div>
-      </aside>
-
-      <section id="cameraPanel" class="camera-panel">
-        <div id="cameraWrap" class="camera-wrap">
-          <video id="webcam" autoplay playsinline muted></video>
-          <canvas id="overlay"></canvas>
-          <div id="cameraPlaceholder" class="camera-placeholder"><div class="placeholder-icon">📷</div><strong>準備開始</strong><span id="placeholderHint">這個動作只需要上半身入鏡，可以坐著做。</span></div>
-          <div class="camera-topbar">
-            <span id="cameraState" class="status-chip">鏡頭未啟動</span>
-            <div class="top-actions">
-              <div class="voice-controls">
-                <button id="ttsToggleBtn" class="voice-btn" type="button" aria-pressed="true">🔊 語音</button>
-                <label id="ttsVolumeWrap" class="voice-volume">音量 <input id="ttsVolume" type="range" min="0" max="1" step="0.05" value="0.8"></label>
-              </div>
-              <button id="mirrorBtn" class="ghost-btn" type="button">鏡像：開</button>
-              <button id="exitWorkoutBtn" class="ghost-btn exit-btn" type="button" hidden>離開運動</button>
-            </div>
-          </div>
-          <div id="trackingRequirement" class="tracking-requirement">👤 上半身辨識｜坐著也可以</div>
-
-          <div id="stageHud" class="stage-hud">
-            <div class="exercise-kicker">現在動作</div>
-            <h2 id="stageExerciseName">側腰伸展</h2>
-            <p id="stageInstruction" class="stage-instruction">跟著中央提示與右側示範人物，一步一步完成。</p>
-            <div id="stageCoachMessage" class="stage-coach-message">按下「開始運動」</div>
-            <div id="stageDetailMessage" class="stage-detail-message">辨識成功時只會保留人體外圍黃色光圈。</div>
-            <div class="stage-metrics">
-              <div><span>姿勢</span><strong id="stageScoreValue">--</strong></div>
-              <div><span>維持</span><strong id="stageHoldValue">0.0s</strong></div>
-              <div><span id="stageRepLabel">完成組數</span><strong id="stageRepValue">0</strong></div>
-            </div>
-            <div class="stage-progress"><div id="stageHoldBar" class="stage-progress-bar"></div></div>
-          </div>
-
-          <aside id="virtualCoach" class="virtual-coach" aria-label="虛擬教練動作示範">
-            <div class="coach-title">動作示範</div><div id="virtualCoachLabel" class="coach-subtitle">跟著人物慢慢做</div><div id="virtualCoachFigure"></div>
-          </aside>
-        </div>
-        <div class="controls setup-only">
-          <button id="startCameraBtn" class="primary-btn" type="button">開始運動・進入全螢幕</button>
-          <button id="resetBtn" class="secondary-btn" type="button">重新校正</button>
-        </div>
-        <p class="voice-note setup-only">語音提示預設開啟，可用右上角 🔊 關閉，或調整音量。</p>
-      </section>
-
-      <aside class="coach-panel setup-only">
-        <p class="eyebrow">開始前確認</p><h2 id="exerciseName">側腰伸展</h2><p id="exerciseInstruction" class="instruction">左右各完成一次才算 1 組。</p>
-        <div class="score-card"><div class="score-ring" id="scoreRing"><span id="scoreValue">--</span><small>姿勢分數</small></div><div><p id="coachMessage" class="coach-message">啟動鏡頭後開始辨識。</p><p id="detailMessage" class="detail-message">久坐救援不要求腳踝入鏡。</p></div></div>
-        <div class="metric-grid"><div class="metric"><span>維持</span><strong id="holdValue">0.0s</strong></div><div class="metric"><span id="repLabel">完成組數</span><strong id="repValue">0</strong></div><div class="metric"><span>入鏡</span><strong id="visibilityValue">--</strong></div></div>
-        <div class="hold-track"><div id="holdBar" class="hold-bar"></div></div>
-      </aside>
+      <aside class="exercise-panel setup-only"><div class="panel-heading"><div><p class="eyebrow">選擇動作</p><h2 id="modeTitle">久坐救援</h2></div><span id="exerciseCount" class="count-badge">0</span></div><div id="exerciseList" class="exercise-list"></div></aside>
+      <section id="cameraPanel" class="camera-panel"><div id="cameraWrap" class="camera-wrap"><video id="webcam" autoplay playsinline muted></video><canvas id="overlay"></canvas><div id="cameraPlaceholder" class="camera-placeholder"><div class="placeholder-icon">📷</div><strong>準備開始</strong><span id="placeholderHint">這個動作只需要上半身入鏡，可以坐著做。</span></div>
+        <div class="camera-topbar"><span id="cameraState" class="status-chip">鏡頭未啟動</span><div class="top-actions"><div class="voice-controls"><button id="ttsToggleBtn" class="voice-btn" type="button" aria-pressed="true">🔊 語音</button><label id="ttsVolumeWrap" class="voice-volume">音量 <input id="ttsVolume" type="range" min="0" max="1" step="0.05" value="0.8"></label></div><button id="mirrorBtn" class="ghost-btn" type="button">鏡像：開</button><button id="exitWorkoutBtn" class="ghost-btn exit-btn" type="button" hidden>離開運動</button></div></div>
+        <div id="trackingRequirement" class="tracking-requirement">👤 上半身辨識｜坐著也可以</div>
+        <div id="stageHud" class="stage-hud"><div class="exercise-kicker">現在動作</div><h2 id="stageExerciseName">側腰伸展</h2><p id="stageInstruction" class="stage-instruction">系統會一步一步帶你做到最後並回正。</p><div id="stageCoachMessage" class="stage-coach-message">按下「開始運動」</div><div id="stageDetailMessage" class="stage-detail-message">辨識成功時人體外圍會顯示固定黃色光圈。</div><div class="stage-metrics"><div><span>姿勢</span><strong id="stageScoreValue">--</strong></div><div><span>維持</span><strong id="stageHoldValue">0.0s</strong></div><div><span id="stageRepLabel">完成組數</span><strong id="stageRepValue">0</strong></div></div><div class="stage-progress"><div id="stageHoldBar" class="stage-progress-bar"></div></div></div>
+        <aside id="virtualCoach" class="virtual-coach" aria-label="虛擬教練動作示範"><div class="coach-title">動作示範</div><div id="virtualCoachLabel" class="coach-subtitle">跟著人物慢慢做</div><div id="virtualCoachFigure"></div></aside>
+      </div><div class="controls setup-only"><button id="startCameraBtn" class="primary-btn" type="button">開始運動・進入全螢幕</button><button id="resetBtn" class="secondary-btn" type="button">重新校正</button></div><p class="voice-note setup-only">語音提示預設開啟，可用右上角 🔊 關閉，或調整音量。</p></section>
+      <aside class="coach-panel setup-only"><p class="eyebrow">開始前確認</p><h2 id="exerciseName">側腰伸展</h2><p id="exerciseInstruction" class="instruction">左右各完成一次才算 1 組。</p><div class="score-card"><div class="score-ring" id="scoreRing"><span id="scoreValue">--</span><small>姿勢分數</small></div><div><p id="coachMessage" class="coach-message">啟動鏡頭後開始辨識。</p><p id="detailMessage" class="detail-message">每個動作都會帶你回到自然姿勢。</p></div></div><div class="metric-grid"><div class="metric"><span>維持</span><strong id="holdValue">0.0s</strong></div><div class="metric"><span id="repLabel">完成組數</span><strong id="repValue">0</strong></div><div class="metric"><span>入鏡</span><strong id="visibilityValue">--</strong></div></div><div class="hold-track"><div id="holdBar" class="hold-bar"></div></div></aside>
     </section>
   </main>
-  <script type="module" src="main.js?v=5"></script>
-  <script type="module" src="glow-fix.js?v=1"></script>
+  <script type="module" src="main.js?v=6"></script>
 </body>
 </html>
