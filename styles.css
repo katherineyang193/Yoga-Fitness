@@ -122,21 +122,21 @@ h1 {
   overflow: hidden;
   border-radius: 18px;
   background: #111b17;
-  border: 5px solid rgba(255,255,255,.08);
+  border: 6px solid rgba(255,255,255,.08);
   transition: border-color .16s ease, box-shadow .16s ease;
 }
 .camera-wrap.tracking-ok {
   border-color: #7dff9c;
-  box-shadow: 0 0 18px rgba(92,255,137,.7), inset 0 0 28px rgba(65,255,118,.18);
-  animation: trackingPulse 1.15s ease-in-out infinite alternate;
+  box-shadow: 0 0 28px rgba(92,255,137,.86), inset 0 0 38px rgba(65,255,118,.24);
+  animation: trackingPulse 1.05s ease-in-out infinite alternate;
 }
 .camera-wrap.tracking-poor {
   border-color: #ffc857;
-  box-shadow: 0 0 16px rgba(255,200,87,.45);
+  box-shadow: 0 0 20px rgba(255,200,87,.48);
 }
 @keyframes trackingPulse {
-  from { box-shadow: 0 0 12px rgba(92,255,137,.5), inset 0 0 20px rgba(65,255,118,.12); }
-  to { box-shadow: 0 0 30px rgba(92,255,137,.9), inset 0 0 44px rgba(65,255,118,.22); }
+  from { box-shadow: 0 0 16px rgba(92,255,137,.55), inset 0 0 24px rgba(65,255,118,.14); }
+  to { box-shadow: 0 0 38px rgba(92,255,137,.96), inset 0 0 52px rgba(65,255,118,.28); }
 }
 video, canvas {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
@@ -152,99 +152,113 @@ video, canvas {
 .placeholder-icon { font-size: 54px; margin-bottom: 4px; }
 .camera-placeholder span { opacity: .72; font-size: 14px; }
 .camera-topbar {
-  position: absolute; top: 14px; left: 14px; right: 14px; z-index: 20;
+  position: absolute; top: max(14px, env(safe-area-inset-top)); left: 14px; right: 14px; z-index: 30;
   display: flex; justify-content: space-between; gap: 10px; pointer-events: none;
 }
 .camera-topbar button { pointer-events: auto; }
 .top-actions { display: flex; gap: 8px; }
 .status-chip {
-  padding: 8px 11px; background: rgba(10,18,14,.72); color: white; backdrop-filter: blur(10px);
+  padding: 9px 13px; background: rgba(10,18,14,.76); color: white; backdrop-filter: blur(10px);
 }
 .ghost-btn, .secondary-btn, .primary-btn {
   border: 0; border-radius: 14px; padding: 11px 16px; font-weight: 800; cursor: pointer;
 }
-.ghost-btn { background: rgba(255,255,255,.88); color: #24312b; }
+.ghost-btn { background: rgba(255,255,255,.9); color: #24312b; }
 .primary-btn { background: #284b3d; color: white; }
 .secondary-btn { background: #e9eee9; color: #304038; }
 .controls { display: flex; gap: 10px; padding-top: 12px; }
 .controls button { flex: 1; }
 
+/* 主舞台 HUD：所有重要文字都留在鏡頭主畫面，不再叫使用者找側欄。 */
 .stage-hud {
   position: absolute;
   inset: 0;
   z-index: 12;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: clamp(72px, 9vh, 110px) clamp(18px, 4vw, 60px) clamp(28px, 5vh, 58px);
+  display: grid;
+  grid-template-rows: auto auto auto minmax(120px, 1fr) auto auto auto;
+  place-items: center;
+  align-content: stretch;
+  padding: clamp(70px, 10vh, 118px) clamp(18px, 4vw, 64px) clamp(24px, 5vh, 58px);
   text-align: center;
   color: white;
   pointer-events: none;
-  background: linear-gradient(to bottom, rgba(6,12,9,.54), rgba(6,12,9,.04) 35%, rgba(6,12,9,.08) 58%, rgba(6,12,9,.64));
+  background: linear-gradient(to bottom, rgba(5,11,8,.58), rgba(5,11,8,.10) 33%, rgba(5,11,8,.12) 66%, rgba(5,11,8,.67));
 }
 .exercise-kicker {
-  font-size: clamp(13px, 1.4vw, 18px);
-  font-weight: 900;
-  letter-spacing: .16em;
-  opacity: .82;
+  font-size: clamp(14px, 1.5vw, 20px);
+  font-weight: 950;
+  letter-spacing: .18em;
+  opacity: .88;
 }
 #stageExerciseName {
-  margin: 6px 0 8px;
-  font-size: clamp(34px, 5vw, 76px);
-  line-height: 1;
-  text-shadow: 0 4px 24px rgba(0,0,0,.55);
+  margin: 5px 0 8px;
+  font-size: clamp(42px, 6.2vw, 92px);
+  line-height: .98;
+  text-shadow: 0 5px 30px rgba(0,0,0,.72);
 }
 .stage-instruction {
-  max-width: 980px;
+  max-width: 1100px;
   margin: 0 auto;
-  font-size: clamp(18px, 2.2vw, 32px);
-  line-height: 1.35;
-  font-weight: 800;
-  text-shadow: 0 3px 18px rgba(0,0,0,.7);
+  padding: 8px 18px;
+  border-radius: 18px;
+  background: rgba(5,12,9,.48);
+  backdrop-filter: blur(6px);
+  font-size: clamp(22px, 2.8vw, 40px);
+  line-height: 1.3;
+  font-weight: 900;
+  text-shadow: 0 3px 20px rgba(0,0,0,.78);
 }
 .stage-coach-message {
-  margin-top: auto;
-  padding: 10px 24px;
-  border-radius: 999px;
-  background: rgba(12,25,19,.7);
-  backdrop-filter: blur(8px);
-  font-size: clamp(30px, 4.8vw, 70px);
-  line-height: 1.05;
-  font-weight: 950;
-  text-shadow: 0 3px 18px rgba(0,0,0,.65);
+  align-self: center;
+  max-width: 1200px;
+  margin: 0;
+  padding: 14px 30px 16px;
+  border-radius: 28px;
+  background: rgba(8,23,15,.76);
+  border: 3px solid rgba(255,255,255,.78);
+  backdrop-filter: blur(9px);
+  font-size: clamp(42px, 7vw, 104px);
+  line-height: .98;
+  font-weight: 1000;
+  letter-spacing: -.03em;
+  text-shadow: 0 5px 24px rgba(0,0,0,.78);
+  box-shadow: 0 8px 36px rgba(0,0,0,.28);
 }
 .stage-detail-message {
-  max-width: 960px;
-  margin-top: 10px;
-  font-size: clamp(17px, 2vw, 28px);
-  font-weight: 750;
-  text-shadow: 0 3px 16px rgba(0,0,0,.7);
+  max-width: 1080px;
+  margin-top: 12px;
+  padding: 7px 16px;
+  border-radius: 16px;
+  background: rgba(6,15,10,.56);
+  font-size: clamp(20px, 2.4vw, 36px);
+  line-height: 1.25;
+  font-weight: 850;
+  text-shadow: 0 3px 18px rgba(0,0,0,.76);
 }
 .stage-metrics {
   display: flex;
   justify-content: center;
   gap: clamp(10px, 2vw, 24px);
-  width: min(840px, 100%);
-  margin-top: 18px;
+  width: min(900px, 100%);
+  margin-top: 14px;
 }
 .stage-metrics > div {
   flex: 1;
   min-width: 0;
   padding: 10px 16px;
   border-radius: 20px;
-  background: rgba(7,16,12,.62);
+  background: rgba(7,16,12,.68);
   backdrop-filter: blur(8px);
 }
-.stage-metrics span { display: block; font-size: clamp(11px, 1.2vw, 16px); opacity: .78; }
-.stage-metrics strong { display: block; margin-top: 2px; font-size: clamp(24px, 3vw, 44px); }
+.stage-metrics span { display: block; font-size: clamp(12px, 1.25vw, 17px); opacity: .82; }
+.stage-metrics strong { display: block; margin-top: 2px; font-size: clamp(28px, 3.3vw, 48px); }
 .stage-progress {
-  width: min(840px, 100%);
-  height: 12px;
+  width: min(900px, 100%);
+  height: 14px;
   margin-top: 10px;
   overflow: hidden;
   border-radius: 999px;
-  background: rgba(255,255,255,.22);
+  background: rgba(255,255,255,.24);
 }
 .stage-progress-bar { height: 100%; width: 0%; background: #8cffaa; transition: width .14s linear; }
 
@@ -270,17 +284,67 @@ video, canvas {
 .hold-track { height: 9px; overflow: hidden; margin: 12px 0 18px; border-radius: 999px; background: #e8ece8; }
 .hold-bar { height: 100%; width: 0%; background: #7aa889; transition: width .15s linear; }
 
+/* 進入運動後固定佔滿 viewport。Fullscreen API 若被瀏覽器拒絕，CSS 仍然全螢幕。 */
 body.workout-active { overflow: hidden; background: #08110d; }
-body.workout-active .app-shell { width: 100%; height: 100vh; padding: 0; }
+body.workout-active .app-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  background: #08110d;
+}
 body.workout-active .hero,
 body.workout-active .mode-grid,
 body.workout-active .setup-only { display: none !important; }
-body.workout-active .workspace { display: block; width: 100%; height: 100vh; }
+body.workout-active .workspace { display: block; width: 100vw; height: 100dvh; }
 body.workout-active .camera-panel {
-  width: 100%; height: 100vh; padding: 0; border: 0; border-radius: 0; background: #08110d; box-shadow: none;
+  width: 100vw;
+  height: 100dvh;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #08110d;
+  box-shadow: none;
 }
-body.workout-active .camera-wrap { min-height: 100vh; height: 100vh; border-radius: 0; }
+body.workout-active .camera-wrap {
+  width: 100vw;
+  height: 100dvh;
+  min-height: 100dvh;
+  border-radius: 0;
+  border-width: 8px;
+}
 body.workout-active .exit-btn { display: inline-flex !important; }
+
+/* 參考 NinjaRun / CuteDart：辨識成功不是小角落亮一下，而是整個視窗亮框。 */
+body.workout-active:has(.camera-wrap.tracking-ok)::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  pointer-events: none;
+  border: clamp(8px, 1.1vw, 16px) solid #78ff9b;
+  box-shadow:
+    inset 0 0 38px rgba(92,255,137,.72),
+    inset 0 0 86px rgba(92,255,137,.25),
+    0 0 38px rgba(92,255,137,.9);
+  animation: viewportTrackingPulse .9s ease-in-out infinite alternate;
+}
+body.workout-active:has(.camera-wrap.tracking-poor)::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  pointer-events: none;
+  border: 9px solid #ffc857;
+  box-shadow: inset 0 0 36px rgba(255,200,87,.34);
+}
+@keyframes viewportTrackingPulse {
+  from { opacity: .72; }
+  to { opacity: 1; }
+}
 
 @media (max-width: 1120px) {
   .workspace { grid-template-columns: 220px 1fr; }
@@ -293,7 +357,14 @@ body.workout-active .exit-btn { display: inline-flex !important; }
   .workspace { grid-template-columns: 1fr; }
   .exercise-panel, .coach-panel { grid-column: auto; }
   .camera-wrap { min-height: 62vh; }
-  .stage-hud { padding-left: 12px; padding-right: 12px; }
+  .stage-hud {
+    grid-template-rows: auto auto auto minmax(100px, 1fr) auto auto auto;
+    padding: max(66px, calc(env(safe-area-inset-top) + 56px)) 10px max(18px, env(safe-area-inset-bottom));
+  }
+  #stageExerciseName { font-size: clamp(34px, 10vw, 58px); }
+  .stage-instruction { font-size: clamp(19px, 5.2vw, 30px); }
+  .stage-coach-message { font-size: clamp(38px, 11vw, 72px); padding: 12px 18px; }
+  .stage-detail-message { font-size: clamp(18px, 5vw, 28px); }
   .stage-metrics { gap: 6px; }
   .stage-metrics > div { padding: 8px 6px; }
   .top-actions { gap: 5px; }
