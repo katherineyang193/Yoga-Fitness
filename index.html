@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f4efe8" />
+  <meta name="theme-color" content="#14231d" />
   <title>Yoga-Fitness｜辦公室體感教練</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -11,9 +11,9 @@
   <main class="app-shell">
     <header class="hero">
       <div>
-        <p class="eyebrow">Yoga-Fitness · v0.1 MVP</p>
+        <p class="eyebrow">Yoga-Fitness · v0.2 TEST</p>
         <h1>站起來，讓肩頸知道你還記得它們。</h1>
-        <p class="subtitle">透過鏡頭辨識姿勢，先從辦公室舒展、站姿瑜珈與基礎健身開始。</p>
+        <p class="subtitle">選好模式與動作後，按「開始運動」就進入全螢幕體感教練。</p>
       </div>
       <div class="privacy-pill">🔒 影像只在瀏覽器端分析</div>
     </header>
@@ -31,10 +31,10 @@
     </section>
 
     <section class="workspace">
-      <aside class="exercise-panel">
+      <aside class="exercise-panel setup-only">
         <div class="panel-heading">
           <div>
-            <p class="eyebrow">本次訓練</p>
+            <p class="eyebrow">選擇動作</p>
             <h2 id="modeTitle">久坐救援</h2>
           </div>
           <span id="exerciseCount" class="count-badge">0</span>
@@ -42,29 +42,50 @@
         <div id="exerciseList" class="exercise-list"></div>
       </aside>
 
-      <section class="camera-panel">
-        <div class="camera-wrap">
+      <section id="cameraPanel" class="camera-panel">
+        <div id="cameraWrap" class="camera-wrap">
           <video id="webcam" autoplay playsinline muted></video>
           <canvas id="overlay"></canvas>
+
           <div id="cameraPlaceholder" class="camera-placeholder">
             <div class="placeholder-icon">📷</div>
-            <strong>尚未啟動鏡頭</strong>
-            <span>請讓頭到腳都能進入畫面</span>
+            <strong>準備開始</strong>
+            <span>請站到鏡頭前，讓頭到腳都能進入畫面</span>
           </div>
+
           <div class="camera-topbar">
             <span id="cameraState" class="status-chip">鏡頭未啟動</span>
-            <button id="mirrorBtn" class="ghost-btn" type="button">鏡像：開</button>
+            <div class="top-actions">
+              <button id="mirrorBtn" class="ghost-btn" type="button">鏡像：開</button>
+              <button id="exitWorkoutBtn" class="ghost-btn exit-btn" type="button" hidden>離開運動</button>
+            </div>
+          </div>
+
+          <div id="stageHud" class="stage-hud">
+            <div class="exercise-kicker">現在動作</div>
+            <h2 id="stageExerciseName">站姿側伸展</h2>
+            <p id="stageInstruction" class="stage-instruction">雙腳站穩，單手上舉，身體慢慢往另一側伸展。</p>
+
+            <div id="stageCoachMessage" class="stage-coach-message">按下「開始運動」</div>
+            <div id="stageDetailMessage" class="stage-detail-message">開始後請看這裡，不用再找旁邊的小字。</div>
+
+            <div class="stage-metrics">
+              <div><span>姿勢</span><strong id="stageScoreValue">--</strong></div>
+              <div><span>維持</span><strong id="stageHoldValue">0.0s</strong></div>
+              <div><span>次數</span><strong id="stageRepValue">0</strong></div>
+            </div>
+            <div class="stage-progress"><div id="stageHoldBar" class="stage-progress-bar"></div></div>
           </div>
         </div>
 
-        <div class="controls">
-          <button id="startCameraBtn" class="primary-btn" type="button">啟動鏡頭</button>
+        <div class="controls setup-only">
+          <button id="startCameraBtn" class="primary-btn" type="button">開始運動・進入全螢幕</button>
           <button id="resetBtn" class="secondary-btn" type="button">重新校正</button>
         </div>
       </section>
 
-      <aside class="coach-panel">
-        <p class="eyebrow">虛擬教練</p>
+      <aside class="coach-panel setup-only">
+        <p class="eyebrow">開始前確認</p>
         <h2 id="exerciseName">站姿側伸展</h2>
         <p id="exerciseInstruction" class="instruction">雙腳站穩，單手上舉，身體慢慢往另一側伸展。</p>
 
@@ -75,7 +96,7 @@
           </div>
           <div>
             <p id="coachMessage" class="coach-message">啟動鏡頭後開始辨識。</p>
-            <p id="detailMessage" class="detail-message">第一版會先判斷是否完整入鏡、關節角度與動作狀態。</p>
+            <p id="detailMessage" class="detail-message">開始運動後，提示會全部移到主畫面中央並放大。</p>
           </div>
         </div>
 
@@ -85,14 +106,7 @@
           <div class="metric"><span>入鏡</span><strong id="visibilityValue">--</strong></div>
         </div>
 
-        <div class="hold-track" aria-label="姿勢維持進度">
-          <div id="holdBar" class="hold-bar"></div>
-        </div>
-
-        <div class="note-box">
-          <strong>目前先不做地板瑜珈</strong>
-          <span>下犬式、平板式、眼鏡蛇式等會留到後續版本，避免一開始就跟鏡頭角度互相折磨。</span>
-        </div>
+        <div class="hold-track"><div id="holdBar" class="hold-bar"></div></div>
       </aside>
     </section>
   </main>
